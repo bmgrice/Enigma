@@ -8,219 +8,127 @@ batch = pyglet.graphics.Batch()
 batch2 = pyglet.graphics.Batch()
 batch3 = pyglet.graphics.Batch()
 
-plugboard = pyglet.window.Window(width=1100, height=500, visible=False, vsync=False)
-
-
-
-
-#label = pyglet.text.Label('Hello, world', 
-#                          font_name='Times New Roman', 
-#                          font_size=36,
-#                          x=window.width//2, y=window.height//2,
-#                          anchor_x='center', anchor_y='center')
-
-class Design():
-    QArc = shapes.Arc(x=100, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    
-    #QArc.anchor_x = 50
-    #QArc.anchor_y = 25
-    WArc = shapes.Arc(x=200, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    EArc = shapes.Arc(x=300, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    RArc = shapes.Arc(x=400, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    TArc = shapes.Arc(x=500, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    YArc = shapes.Arc(x=600, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    UArc = shapes.Arc(x=700, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    IArc = shapes.Arc(x=800, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    OArc = shapes.Arc(x=900, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    PArc = shapes.Arc(x=1000, y=350, radius=40, color=(255, 255, 255), batch=batch)
-    ####
-    AArc = shapes.Arc(x=150, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    SArc = shapes.Arc(x=250, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    DArc = shapes.Arc(x=350, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    FArc = shapes.Arc(x=450, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    GArc = shapes.Arc(x=550, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    HArc = shapes.Arc(x=650, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    JArc = shapes.Arc(x=750, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    KArc = shapes.Arc(x=850, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    LArc = shapes.Arc(x=950, y=250, radius=40, color=(255, 255, 255), batch=batch)
-    ####
-    ZArc = shapes.Arc(x=250, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    XArc = shapes.Arc(x=350, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    CArc = shapes.Arc(x=450, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    VArc = shapes.Arc(x=550, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    BArc = shapes.Arc(x=650, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    NArc = shapes.Arc(x=750, y=150, radius=40, color=(255, 255, 255), batch=batch)
-    MArc = shapes.Arc(x=850, y=150, radius=40, color=(255, 255, 255), batch=batch)
-
-    ##########
-
-    QLabel = pyglet.text.Label('Q', font_name='Times New Roman', font_size=32,
-                               x=100, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    WLabel = pyglet.text.Label('W', font_name='Times New Roman', font_size=32,
-                               x=200, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    ELabel = pyglet.text.Label('E', font_name='Times New Roman', font_size=32,
-                               x=300, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    RLabel = pyglet.text.Label('R', font_name='Times New Roman', font_size=32,
-                               x=400, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    TLabel = pyglet.text.Label('T', font_name='Times New Roman', font_size=32,
-                               x=500, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    YLabel = pyglet.text.Label('Y', font_name='Times New Roman', font_size=32,
-                               x=600, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    ULabel = pyglet.text.Label('U', font_name='Times New Roman', font_size=32,
-                               x=700, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    ILabel = pyglet.text.Label('I', font_name='Times New Roman', font_size=32,
-                               x=800, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    OLabel = pyglet.text.Label('O', font_name='Times New Roman', font_size=32,
-                               x=900, y=353, anchor_x="center", anchor_y="center", batch=batch)
-    PLabel = pyglet.text.Label('P', font_name='Times New Roman', font_size=32,
-                               x=1000, y=353, anchor_x="center", anchor_y="center", batch=batch)
-
-    ####
-    ALabel = pyglet.text.Label('A', font_name='Times New Roman', font_size=32,
-                               x=150, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    SLabel = pyglet.text.Label('S', font_name='Times New Roman', font_size=32,
-                               x=250, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    DLabel = pyglet.text.Label('D', font_name='Times New Roman', font_size=32,
-                               x=350, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    FLabel = pyglet.text.Label('F', font_name='Times New Roman', font_size=32,
-                               x=450, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    GLabel = pyglet.text.Label('G', font_name='Times New Roman', font_size=32,
-                               x=550, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    HLabel = pyglet.text.Label('H', font_name='Times New Roman', font_size=32,
-                               x=650, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    JLabel = pyglet.text.Label('J', font_name='Times New Roman', font_size=32,
-                               x=750, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    KLabel = pyglet.text.Label('K', font_name='Times New Roman', font_size=32,
-                               x=850, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    LLabel = pyglet.text.Label('L', font_name='Times New Roman', font_size=32,
-                               x=950, y=253, anchor_x="center", anchor_y="center", batch=batch)
-    ####
-    
-    ZLabel = pyglet.text.Label('Z', font_name='Times New Roman', font_size=32,
-                               x=250, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    XLabel = pyglet.text.Label('X', font_name='Times New Roman', font_size=32,
-                               x=350, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    CLabel = pyglet.text.Label('C', font_name='Times New Roman', font_size=32,
-                               x=450, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    VLabel = pyglet.text.Label('V', font_name='Times New Roman', font_size=32,
-                               x=550, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    BLabel = pyglet.text.Label('B', font_name='Times New Roman', font_size=32,
-                               x=650, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    NLabel = pyglet.text.Label('N', font_name='Times New Roman', font_size=32,
-                               x=750, y=153, anchor_x="center", anchor_y="center", batch=batch)
-    MLabel = pyglet.text.Label('M', font_name='Times New Roman', font_size=32,
-                               x=850, y=153, anchor_x="center", anchor_y="center", batch=batch)
-
-    Plugboard = pyglet.text.Label('Plugboard', font_name='Times New Roman', font_size=38,
-                                  x=550, y=40, anchor_x="center", anchor_y="center", batch=batch)
-
-    @window.event
-    def on_key_press(symbol, modifiers):
-        if symbol == key.Q:
-            QCircle = shapes.Circle(x=100, y=350, radius=40, color=(255, 255, 0), batch=batch3)
-            batch3.draw()
-            print(key.Q)
-
-
-            
-    
-class plugboardC():
-    QPlugCircle = shapes.Circle(x=100, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    WPlugCircle = shapes.Circle(x=200, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    EPlugCircle = shapes.Circle(x=300, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    RPlugCircle = shapes.Circle(x=400, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    TPlugCircle = shapes.Circle(x=500, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    YPlugCircle = shapes.Circle(x=600, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    UPlugCircle = shapes.Circle(x=700, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    IPlugCircle = shapes.Circle(x=800, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    OPlugCircle = shapes.Circle(x=900, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    PPlugCircle = shapes.Circle(x=1000, y=350, radius=15, color=(255, 255, 255), batch=batch2)
-    ####
-    APlugCircle = shapes.Circle(x=150, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    SPlugCircle = shapes.Circle(x=250, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    DPlugCircle = shapes.Circle(x=350, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    FPlugCircle = shapes.Circle(x=450, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    GPlugCircle = shapes.Circle(x=550, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    HPlugCircle = shapes.Circle(x=650, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    JPlugCircle = shapes.Circle(x=750, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    KPlugCircle = shapes.Circle(x=850, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    LPlugCircle = shapes.Circle(x=950, y=250, radius=15, color=(255, 255, 255), batch=batch2)
-    ####
-    ZPlugCircle = shapes.Circle(x=250, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    XPlugCircle = shapes.Circle(x=350, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    CPlugCircle = shapes.Circle(x=450, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    VplugCircle = shapes.Circle(x=550, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    BPlugCircle = shapes.Circle(x=650, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    NPlugCircle = shapes.Circle(x=750, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-    MPlugCircle = shapes.Circle(x=850, y=150, radius=15, color=(255, 255, 255), batch=batch2)
-
-    ##########
-
-    QPlugLabel = pyglet.text.Label('Q', font_name='Times New Roman', font_size=24,
-                               x=100, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    WPlugLabel = pyglet.text.Label('W', font_name='Times New Roman', font_size=24,
-                               x=200, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    EPlugLabel = pyglet.text.Label('E', font_name='Times New Roman', font_size=24,
-                               x=300, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    RPlugLabel = pyglet.text.Label('R', font_name='Times New Roman', font_size=24,
-                               x=400, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    TPlugLabel = pyglet.text.Label('T', font_name='Times New Roman', font_size=24,
-                               x=500, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    YPlugLabel = pyglet.text.Label('Y', font_name='Times New Roman', font_size=24,
-                               x=600, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    UPlugLabel = pyglet.text.Label('U', font_name='Times New Roman', font_size=24,
-                               x=700, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    IPlugLabel = pyglet.text.Label('I', font_name='Times New Roman', font_size=24,
-                               x=800, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    OPlugLabel = pyglet.text.Label('O', font_name='Times New Roman', font_size=24,
-                               x=900, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-    PPlugLabel = pyglet.text.Label('P', font_name='Times New Roman', font_size=24,
-                               x=1000, y=313, anchor_x="center", anchor_y="center", batch=batch2)
-
-    ####
-    ALabel = pyglet.text.Label('A', font_name='Times New Roman', font_size=24,
-                               x=150, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    SLabel = pyglet.text.Label('S', font_name='Times New Roman', font_size=24,
-                               x=250, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    DLabel = pyglet.text.Label('D', font_name='Times New Roman', font_size=24,
-                               x=350, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    FLabel = pyglet.text.Label('F', font_name='Times New Roman', font_size=24,
-                               x=450, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    GLabel = pyglet.text.Label('G', font_name='Times New Roman', font_size=24,
-                               x=550, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    HLabel = pyglet.text.Label('H', font_name='Times New Roman', font_size=24,
-                               x=650, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    JLabel = pyglet.text.Label('J', font_name='Times New Roman', font_size=24,
-                               x=750, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    KLabel = pyglet.text.Label('K', font_name='Times New Roman', font_size=24,
-                               x=850, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    LLabel = pyglet.text.Label('L', font_name='Times New Roman', font_size=24,
-                               x=950, y=213, anchor_x="center", anchor_y="center", batch=batch2)
-    ####
-    
-    ZPlugLabel = pyglet.text.Label('Z', font_name='Times New Roman', font_size=24,
-                               x=250, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    XPlugLabel = pyglet.text.Label('X', font_name='Times New Roman', font_size=24,
-                               x=350, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    CPlugLabel = pyglet.text.Label('C', font_name='Times New Roman', font_size=24,
-                               x=450, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    VPlugLabel = pyglet.text.Label('V', font_name='Times New Roman', font_size=24,
-                               x=550, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    BPlugLabel = pyglet.text.Label('B', font_name='Times New Roman', font_size=24,
-                               x=650, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    NPlugLabel = pyglet.text.Label('N', font_name='Times New Roman', font_size=24,
-                               x=750, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-    MPlugLabel = pyglet.text.Label('M', font_name='Times New Roman', font_size=24,
-                               x=850, y=113, anchor_x="center", anchor_y="center", batch=batch2)
-
-
-    
-
-
+plugboard = pyglet.window.Window(width=1100, height=500, visible=False)
 loc = window.get_location()
 size= window.get_size()
 plugboard.set_location(loc[0],loc[1]+80)
 plugboard.set_size(size[0], size[1]-80)
+
+
+
+
+class Key():
+    def __init__(self, x, y, letter):
+        self.x = x
+        self.y = y
+        self.letter=str(letter)
+
+    def shape(self):
+        return shapes.Arc(self.x,self.y,radius=40, color=(255,255,255) , batch=batch), \
+               pyglet.text.Label(self.letter, font_name='Times New Roman', font_size=32, x=self.x, y=self.y+3, anchor_x="center", anchor_y="center", batch=batch)
+
+
+
+TopRow = 350
+QArc = Key.shape(Key(100,TopRow, 'Q'))
+WArc = Key.shape(Key(200,TopRow, 'W'))
+EArc = Key.shape(Key(300,TopRow, 'E'))
+RArc = Key.shape(Key(400,TopRow, 'R'))
+TArc = Key.shape(Key(500,TopRow, 'T'))
+YArc = Key.shape(Key(600,TopRow, 'Y'))
+UArc = Key.shape(Key(700,TopRow, 'U'))
+IArc = Key.shape(Key(800,TopRow, 'I'))
+OArc = Key.shape(Key(900,TopRow, 'O'))
+PArc = Key.shape(Key(1000,TopRow, 'P'))
+
+####
+MidRow = 250
+AArc = Key.shape(Key(150,MidRow, 'A'))
+SArc = Key.shape(Key(250,MidRow, 'S'))
+DArc = Key.shape(Key(350,MidRow, 'D'))
+FArc = Key.shape(Key(450,MidRow, 'F'))
+GArc = Key.shape(Key(550,MidRow, 'G'))
+HArc = Key.shape(Key(650,MidRow, 'H'))
+JArc = Key.shape(Key(750,MidRow, 'J'))
+KArc = Key.shape(Key(850,MidRow, 'K'))
+LArc = Key.shape(Key(950,MidRow, 'L'))
+
+
+####
+BotRow = 150
+ZArc = Key.shape(Key(250,BotRow, 'Z'))
+XArc = Key.shape(Key(350,BotRow, 'X'))
+CArc = Key.shape(Key(450,BotRow, 'C'))
+VArc = Key.shape(Key(550,BotRow, 'V'))
+BArc = Key.shape(Key(650,BotRow, 'B'))
+NArc = Key.shape(Key(750,BotRow, 'N'))
+MArc = Key.shape(Key(850,BotRow, 'M'))
+
+
+
+Plugboard = pyglet.text.Label('Plugboard', font_name='Times New Roman', font_size=38,
+                              x=550, y=40, anchor_x="center", anchor_y="center", batch=batch)
+
+
+
+
+class PBW(pyglet.window.Window):
+    pass
+
+
+
+            
+    
+class PB():
+    def __init__(self, x, y, letter):
+        self.x = x
+        self.y = y
+        self.letter=str(letter)
+
+    def shape(self):
+        return shapes.Circle(self.x,self.y,radius=15, color=(255,255,255) , batch=batch2), \
+               pyglet.text.Label(self.letter, font_name='Times New Roman', font_size=24, x=self.x, y=self.y-37, bold=False, anchor_x="center", anchor_y="center", batch=batch2)
+
+
+TopRowPB = 350
+QPBCircle = PB.shape(PB(100,TopRowPB, 'Q'))
+WPBCircle = PB.shape(PB(200,TopRowPB, 'W'))
+EPBCircle = PB.shape(PB(300,TopRowPB, 'E'))
+RPBCircle = PB.shape(PB(400,TopRowPB, 'R'))
+TPBCircle = PB.shape(PB(500,TopRowPB, 'T'))
+YPBCircle = PB.shape(PB(600,TopRowPB, 'Y'))
+UPBCircle = PB.shape(PB(700,TopRowPB, 'U'))
+IPBCircle = PB.shape(PB(800,TopRowPB, 'I'))
+OPBCircle = PB.shape(PB(900,TopRowPB, 'O'))
+PPBCircle = PB.shape(PB(1000,TopRowPB, 'P'))
+
+MidRowPB = 250
+APBCircle = PB.shape(PB(150,MidRowPB, 'A'))
+SPBCircle = PB.shape(PB(250,MidRowPB, 'S'))
+DPBCircle = PB.shape(PB(350,MidRowPB, 'D'))
+FPBCircle = PB.shape(PB(450,MidRowPB, 'F'))
+GPBCircle = PB.shape(PB(550,MidRowPB, 'G'))
+HPBCircle = PB.shape(PB(650,MidRowPB, 'H'))
+JPBCircle = PB.shape(PB(750,MidRowPB, 'J'))
+KPBCircle = PB.shape(PB(850,MidRowPB, 'K'))
+LPBCircle = PB.shape(PB(950,MidRowPB, 'L'))
+
+BotRowPB = 150
+ZPBCircle = PB.shape(PB(250,BotRowPB, 'Z'))
+XPBCircle = PB.shape(PB(350,BotRowPB, 'X'))
+CPBCircle = PB.shape(PB(450,BotRowPB, 'C'))
+VPBCircle = PB.shape(PB(550,BotRowPB, 'V'))
+BPBCircle = PB.shape(PB(650,BotRowPB, 'B'))
+NPBCircle = PB.shape(PB(750,BotRowPB, 'N'))
+MPBCircle = PB.shape(PB(850,BotRowPB, 'M'))
+
+    
+
+
+    
+
+
+
 
 @window.event
 def on_draw():
@@ -228,8 +136,19 @@ def on_draw():
     plugboard.clear()
     #label.draw()
     batch.draw()
+    
 
+@plugboard.event
+def on_draw():
+    plugboard.clear
+    batch2.draw()
 
+@window.event
+def on_key_press(symbol, modifiers):
+    #if symbol == key.Q:
+    QCircle = shapes.Circle(x=100, y=350, radius=40, color=(255, 255, 0), batch=batch)
+    on_draw()
+    print(key.Q)
 
 
 @window.event
@@ -240,12 +159,16 @@ def on_mouse_press(x, y, button, modifiers):
 def on_mouse_leave(x,y):
     plugboard.set_visible(False)
     
+    
 @window.event
 def on_mouse_press(x, y, button, modifiers):
     if y<90:
+        #plugboard.set_visible(False)
+        plugboard.clear()
+        plugboard.switch_to()
         
         plugboard.set_visible(True)
-        batch2.draw()
+        
     
 
 
