@@ -14,55 +14,99 @@ size= window.get_size()
 plugboard.set_location(loc[0],loc[1]+80)
 plugboard.set_size(size[0], size[1]-80)
 
+#Dictionaries to convert Pyglet key press symbol to alphabet
+abc_symbol={'A':97, 'B':98, 'C':99, 'D':100 ,'E':101, 'F':102, 'G':103, 'H':104, 'I':105, 'J':106, 'K':107, 'L':108, 'M':109, \
+             'N':110, 'O':111, 'P':112, 'Q':113, 'R':114, 'S':115, 'T':116, 'U':117, 'V':118, 'W':119, 'X':120, 'Y':121, 'Z':122}
+symbol_abc={97: 'A', 98: 'B', 99: 'C', 100: 'D' ,101: 'E', 102: 'F', 103: 'G', 104: 'H', 105: 'I', 106: 'J', 107:'K', 108: 'L', 109: 'M', \
+             110: 'N', 111: 'O', 112: 'P', 113: 'Q', 114: 'R', 115: 'S', 116: 'T', 117: 'U', 118: 'V', 119: 'W', 120: 'X', 121: 'Y', 122: 'Z'}
 
+#Alphabet used for indexing
+abc    = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
+
+#Rotor
+I      = ('E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J')
+II     = ('A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E')
+III    = ('B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O')
+IV     = ('E', 'S', 'O', 'V', 'P', 'Z', 'J', 'A', 'Y', 'Q', 'U', 'I', 'R', 'H', 'X', 'L', 'N', 'F', 'T', 'G', 'K', 'D', 'C', 'M', 'W', 'B')
+V      = ('V', 'Z', 'B', 'R', 'G', 'I', 'T', 'Y', 'U', 'P', 'S', 'D', 'N', 'H', 'L', 'X', 'A', 'W', 'M', 'J', 'Q', 'O', 'F', 'E', 'C', 'K')
+VI     = ('J', 'P', 'G', 'V', 'O', 'U', 'M', 'F', 'Y', 'Q', 'B', 'E', 'N', 'H', 'Z', 'R', 'D', 'K', 'A', 'S', 'X', 'L', 'I', 'C', 'T', 'W')
+VII    = ('N', 'Z', 'J', 'H', 'G', 'R', 'C', 'X', 'M', 'Y', 'S', 'W', 'B', 'O', 'U', 'F', 'A', 'I', 'V', 'L', 'P', 'E', 'K', 'Q', 'D', 'T')
+VIII   = ('F', 'K', 'Q', 'H', 'T', 'L', 'X', 'O', 'C', 'B', 'J', 'S', 'P', 'D', 'Z', 'R', 'A', 'M', 'E', 'W', 'N', 'I', 'U', 'Y', 'G', 'V')
+Beta   = ('L', 'E', 'Y', 'J', 'V', 'C', 'N', 'I', 'X', 'W', 'P', 'B', 'Q', 'M', 'D', 'R', 'T', 'A', 'K', 'Z', 'G', 'F', 'U', 'H', 'O', 'S')
+Gamma  = ('F', 'S', 'O', 'K', 'A', 'N', 'U', 'E', 'R', 'H', 'M', 'B', 'T', 'I', 'Y', 'C', 'W', 'L', 'Q', 'P', 'Z', 'X', 'V', 'G', 'J', 'D')
+
+#Reflector
+A      = ('E', 'J', 'M', 'Z', 'A', 'L', 'Y', 'X', 'V', 'B', 'W', 'F', 'C', 'R', 'Q', 'U', 'O', 'N', 'T', 'S', 'P', 'I', 'K', 'H', 'G', 'D')
+B      = ('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', 'K', 'M', 'I', 'E', 'B', 'F', 'Z', 'C', 'W', 'V', 'J', 'A', 'T')
+C      = ('F', 'V', 'P', 'J', 'I', 'A', 'O', 'Y', 'E', 'D', 'R', 'Z', 'X', 'W', 'G', 'C', 'T', 'K', 'U', 'Q', 'S', 'B', 'N', 'M', 'H', 'L')
+B_Thin = ('E', 'N', 'K', 'Q', 'A', 'U', 'Y', 'W', 'J', 'I', 'C', 'O', 'P', 'B', 'L', 'M', 'D', 'X', 'Z', 'V', 'F', 'T', 'H', 'R', 'G', 'S')
+C_Thin = ('R', 'D', 'O', 'B', 'J', 'N', 'T', 'K', 'V', 'E', 'H', 'M', 'L', 'F', 'C', 'W', 'Z', 'A', 'X', 'G', 'Y', 'I', 'P', 'S', 'U', 'Q')
+
+
+Rotors = [I, II, III]
+
+Rotor_1 = Rotors[0]
+Rotor_2 = Rotors[1]
+Rotor_3 = Rotors[2]
+Reflector = A
 
 
 class Key():
-    def __init__(self, x, y, letter):
+    def __init__(self, x, y, letter, visible):
         self.x = x
         self.y = y
         self.letter=str(letter)
+        self.visible = visible
 
     def shape(self):
         return shapes.Arc(self.x,self.y,radius=40, color=(255,255,255) , batch=batch), \
                pyglet.text.Label(self.letter, font_name='Times New Roman', font_size=32, x=self.x, y=self.y+3, anchor_x="center", anchor_y="center", batch=batch)
+    
+    def lamp(self):
+        return shapes.Circle(self.x,self.y,radius=40, color=(255,255,0) ,  batch=batch)
 
 
 
 TopRow = 350
-QArc = Key.shape(Key(100,TopRow, 'Q'))
-WArc = Key.shape(Key(200,TopRow, 'W'))
-EArc = Key.shape(Key(300,TopRow, 'E'))
-RArc = Key.shape(Key(400,TopRow, 'R'))
-TArc = Key.shape(Key(500,TopRow, 'T'))
-YArc = Key.shape(Key(600,TopRow, 'Y'))
-UArc = Key.shape(Key(700,TopRow, 'U'))
-IArc = Key.shape(Key(800,TopRow, 'I'))
-OArc = Key.shape(Key(900,TopRow, 'O'))
-PArc = Key.shape(Key(1000,TopRow, 'P'))
+QArc = Key.shape(Key(100,TopRow, 'Q', True))
+WArc = Key.shape(Key(200,TopRow, 'W', True))
+EArc = Key.shape(Key(300,TopRow, 'E', True))
+RArc = Key.shape(Key(400,TopRow, 'R', True))
+TArc = Key.shape(Key(500,TopRow, 'T', True))
+YArc = Key.shape(Key(600,TopRow, 'Y', True))
+UArc = Key.shape(Key(700,TopRow, 'U', True))
+IArc = Key.shape(Key(800,TopRow, 'I', True))
+OArc = Key.shape(Key(900,TopRow, 'O', True))
+PArc = Key.shape(Key(1000,TopRow, 'P', True))
+
+QCircle = Key.lamp(Key(100, TopRow, 'Q', False))
+QCircle.visible = False
+WCircle = Key.lamp(Key(200, TopRow, 'W', False))
+WCircle.visible = False
+
 
 ####
 MidRow = 250
-AArc = Key.shape(Key(150,MidRow, 'A'))
-SArc = Key.shape(Key(250,MidRow, 'S'))
-DArc = Key.shape(Key(350,MidRow, 'D'))
-FArc = Key.shape(Key(450,MidRow, 'F'))
-GArc = Key.shape(Key(550,MidRow, 'G'))
-HArc = Key.shape(Key(650,MidRow, 'H'))
-JArc = Key.shape(Key(750,MidRow, 'J'))
-KArc = Key.shape(Key(850,MidRow, 'K'))
-LArc = Key.shape(Key(950,MidRow, 'L'))
+AArc = Key.shape(Key(150,MidRow, 'A', True))
+SArc = Key.shape(Key(250,MidRow, 'S', True))
+DArc = Key.shape(Key(350,MidRow, 'D', True))
+FArc = Key.shape(Key(450,MidRow, 'F', True))
+GArc = Key.shape(Key(550,MidRow, 'G', True))
+HArc = Key.shape(Key(650,MidRow, 'H', True))
+JArc = Key.shape(Key(750,MidRow, 'J', True))
+KArc = Key.shape(Key(850,MidRow, 'K', True))
+LArc = Key.shape(Key(950,MidRow, 'L', True))
 
 
 ####
 BotRow = 150
-ZArc = Key.shape(Key(250,BotRow, 'Z'))
-XArc = Key.shape(Key(350,BotRow, 'X'))
-CArc = Key.shape(Key(450,BotRow, 'C'))
-VArc = Key.shape(Key(550,BotRow, 'V'))
-BArc = Key.shape(Key(650,BotRow, 'B'))
-NArc = Key.shape(Key(750,BotRow, 'N'))
-MArc = Key.shape(Key(850,BotRow, 'M'))
+ZArc = Key.shape(Key(250,BotRow, 'Z', True))
+XArc = Key.shape(Key(350,BotRow, 'X', True))
+CArc = Key.shape(Key(450,BotRow, 'C', True))
+VArc = Key.shape(Key(550,BotRow, 'V', True))
+BArc = Key.shape(Key(650,BotRow, 'B', True))
+NArc = Key.shape(Key(750,BotRow, 'N', True))
+MArc = Key.shape(Key(850,BotRow, 'M', True))
 
 
 
@@ -145,11 +189,22 @@ def on_draw():
 
 @window.event
 def on_key_press(symbol, modifiers):
-    #if symbol == key.Q:
-    QCircle = shapes.Circle(x=100, y=350, radius=40, color=(255, 255, 0), batch=batch)
-    on_draw()
-    print(key.Q)
+    print(symbol_abc[symbol])
+    letter = symbol_abc[symbol]
 
+    if symbol == key.Q:
+        QCircle.visible= True
+    if symbol == key.W:
+        WCircle.visible=True
+
+@window.event
+def on_key_release(symbol, modifiers):
+    
+
+    if symbol == key.Q:
+        QCircle.visible=False
+    if symbol == key.W:
+        WCircle.visible=False
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
