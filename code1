@@ -14,6 +14,13 @@ size= window.get_size()
 plugboard.set_location(loc[0],loc[1]+80)
 plugboard.set_size(size[0], size[1]-80)
 
+
+
+
+
+
+
+
 #Dictionaries to convert Pyglet key press symbol to alphabet
 abc_symbol={'A':97, 'B':98, 'C':99, 'D':100 ,'E':101, 'F':102, 'G':103, 'H':104, 'I':105, 'J':106, 'K':107, 'L':108, 'M':109, \
              'N':110, 'O':111, 'P':112, 'Q':113, 'R':114, 'S':115, 'T':116, 'U':117, 'V':118, 'W':119, 'X':120, 'Y':121, 'Z':122}
@@ -48,7 +55,9 @@ Rotors = [I, II, III]
 Rotor_1 = Rotors[0]
 Rotor_2 = Rotors[1]
 Rotor_3 = Rotors[2]
+#Rotor_4 = Rotors[3]
 Reflector = A
+
 
 
 class Key():
@@ -83,7 +92,22 @@ QCircle = Key.lamp(Key(100, TopRow, 'Q', False))
 QCircle.visible = False
 WCircle = Key.lamp(Key(200, TopRow, 'W', False))
 WCircle.visible = False
-
+ECircle = Key.lamp(Key(300, TopRow, 'E', False))
+ECircle.visible = False
+RCircle = Key.lamp(Key(400, TopRow, 'R', False))
+RCircle.visible = False
+TCircle = Key.lamp(Key(500, TopRow, 'T', False))
+TCircle.visible = False
+YCircle = Key.lamp(Key(600, TopRow, 'Y', False))
+YCircle.visible = False
+UCircle = Key.lamp(Key(700, TopRow, 'U', False))
+UCircle.visible = False
+ICircle = Key.lamp(Key(800, TopRow, 'I', False))
+ICircle.visible = False
+OCircle = Key.lamp(Key(900, TopRow, 'O', False))
+OCircle.visible = False
+PCircle = Key.lamp(Key(1000, TopRow, 'P', False))
+PCircle.visible = False
 
 ####
 MidRow = 250
@@ -97,6 +121,25 @@ JArc = Key.shape(Key(750,MidRow, 'J', True))
 KArc = Key.shape(Key(850,MidRow, 'K', True))
 LArc = Key.shape(Key(950,MidRow, 'L', True))
 
+ACircle = Key.lamp(Key(150, MidRow, 'A', False))
+ACircle.visible = False
+SCircle = Key.lamp(Key(250, MidRow, 'S', False))
+SCircle.visible = False
+DCircle = Key.lamp(Key(350, MidRow, 'D', False))
+DCircle.visible = False
+FCircle = Key.lamp(Key(450, MidRow, 'F', False))
+FCircle.visible = False
+GCircle = Key.lamp(Key(550, MidRow, 'G', False))
+GCircle.visible = False
+HCircle = Key.lamp(Key(650, MidRow, 'H', False))
+HCircle.visible = False
+JCircle = Key.lamp(Key(750, MidRow, 'J', False))
+JCircle.visible = False
+KCircle = Key.lamp(Key(850, MidRow, 'K', False))
+KCircle.visible = False
+LCircle = Key.lamp(Key(950, MidRow, 'L', False))
+LCircle.visible = False
+
 
 ####
 BotRow = 150
@@ -108,13 +151,44 @@ BArc = Key.shape(Key(650,BotRow, 'B', True))
 NArc = Key.shape(Key(750,BotRow, 'N', True))
 MArc = Key.shape(Key(850,BotRow, 'M', True))
 
+ZCircle = Key.lamp(Key(250, BotRow, 'Z', False))
+ZCircle.visible = False
+XCircle = Key.lamp(Key(350, BotRow, 'X', False))
+XCircle.visible = False
+CCircle = Key.lamp(Key(450, BotRow, 'C', False))
+CCircle.visible = False
+VCircle = Key.lamp(Key(550, BotRow, 'V', False))
+VCircle.visible = False
+BCircle = Key.lamp(Key(650, BotRow, 'B', False))
+BCircle.visible = False
+NCircle = Key.lamp(Key(750, BotRow, 'N', False))
+NCircle.visible = False
+MCircle = Key.lamp(Key(850, BotRow, 'M', False))
+MCircle.visible = False
+
 
 
 Plugboard = pyglet.text.Label('Plugboard', font_name='Times New Roman', font_size=38,
                               x=550, y=40, anchor_x="center", anchor_y="center", batch=batch)
 
 
+class indicator():
+    def __init__(self, x, y, letter):
+        self.x = x
+        self.y = y
+        self.letter = str(letter)
 
+    def window(self):
+        return shapes.Rectangle(self.x, self.y, 60, 60, color=(255,255,255), batch=batch), \
+               pyglet.text.Label(self.letter, font_name='Times New Roman', font_size=32, x=self.x+30, y=self.y+35, anchor_x="center", color=(0,0,0,255), anchor_y="center", batch=batch)
+               
+R1 = indicator.window(indicator(250, 500, "Q"))
+R2 = indicator.window(indicator(350, 500, "Q"))
+R3 = indicator.window(indicator(450, 500, "Q"))
+#R4 = indicator.window(indicator(550, 500, "Q"))
+
+
+  
 
 class PBW(pyglet.window.Window):
     pass
@@ -179,7 +253,7 @@ def on_draw():
     window.clear()  
     plugboard.clear()
     #label.draw()
-    batch.draw()
+    batch.draw()    
     
 
 @plugboard.event
@@ -189,22 +263,135 @@ def on_draw():
 
 @window.event
 def on_key_press(symbol, modifiers):
-    print(symbol_abc[symbol])
     letter = symbol_abc[symbol]
+    index = abc.index(letter)
+    print(letter, index)
 
-    if symbol == key.Q:
+    #letter = R4[index(letter)
+    #index = R4.index(letter)
+
+    index = Rotor_3.index(letter)
+    letter = Rotor_3[index]
+    
+    print(letter, index, Rotor_3)
+
+
+    index = Rotor_2.index(letter)
+    letter = abc[index]
+    letter = Rotor_2[index]
+    
+    print(letter, index, Rotor_2)
+
+    index = Rotor_1.index(letter)
+    letter = Rotor_1[index]
+    
+    print(letter, index, Rotor_1)
+
+    index = Reflector.index(letter)                
+    letter = Reflector[index]
+    
+    print(letter, index)
+                    
+    
+    light = letter
+    #print(symbol)
+
+    
+    if light == "Q":
         QCircle.visible= True
-    if symbol == key.W:
+    if light == "W":
         WCircle.visible=True
+    if light == "E":
+        ECircle.visible=True
+    if light == "R":
+        RCircle.visible=True
+    if light == "T":
+        TCircle.visible=True
+    if light == "Y":
+        YCircle.visible=True
+    if light == "U":
+        UCircle.visible=True
+    if light == "I":
+        ICircle.visible=True
+    if light == "O":
+        OCircle.visible=True
+    if light == "P":
+        PCircle.visible=True
+
+    if light == "A":
+        ACircle.visible=True
+    if light == "S":
+        SCircle.visible=True
+    if light == "D":
+        DCircle.visible=True
+    if light == "F":
+        FCircle.visible=True
+    if light == "G":
+        GCircle.visible=True
+    if light == "H":
+        HCircle.visible=True
+    if light == "J":
+        JCircle.visible=True
+    if light == "K":
+        KCircle.visible=True
+    if light == "L":
+        LCircle.visible=True
+
+    if light == "Z":
+        ZCircle.visible=True
+    if light == "X":
+        XCircle.visible=True
+    if light == "C":
+        CCircle.visible=True
+    if light == "V":
+        VCircle.visible=True
+    if light == "B":
+        BCircle.visible=True
+    if light == "N":
+        NCircle.visible=True
+    if light == "M":
+        MCircle.visible=True
 
 @window.event
 def on_key_release(symbol, modifiers):
-    
+    QCircle.visible=False
+    WCircle.visible=False
+    ECircle.visible=False
+    RCircle.visible=False
+    TCircle.visible=False
+    YCircle.visible=False
+    UCircle.visible=False
+    ICircle.visible=False
+    OCircle.visible=False
+    PCircle.visible=False
 
-    if symbol == key.Q:
-        QCircle.visible=False
-    if symbol == key.W:
-        WCircle.visible=False
+    ACircle.visible=False
+    SCircle.visible=False
+    DCircle.visible=False
+    FCircle.visible=False
+    GCircle.visible=False
+    HCircle.visible=False
+    JCircle.visible=False
+    KCircle.visible=False
+    LCircle.visible=False
+
+    ZCircle.visible=False
+    XCircle.visible=False
+    CCircle.visible=False
+    VCircle.visible=False
+    BCircle.visible=False
+    NCircle.visible=False
+    MCircle.visible=False
+
+    
+##    if symbol == key.Q:
+##        QCircle.visible=False
+##    if symbol == key.W:
+##        WCircle.visible=False
+##    if symbol == key.E:
+##        ECircle.visible=False
+##    if symbol == key.R:
+##        RCircle.visible=False
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
