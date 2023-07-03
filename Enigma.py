@@ -15,8 +15,9 @@ keyLoc = {'q': [100, 'top'], 'w': [200,'top'], 'e': [300, 'top'], 'r':[400,'top'
 abc    = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
 
 #Rotor
-rotors = {'I': [WIDTH - 250, 150, False], 'II': [WIDTH - 150, 150, False], 'III': [WIDTH - 50, 150, False], 'IV': [WIDTH - 250, 250, False], 'V': [WIDTH - 150, 250, False], 'VI': [WIDTH - 50, 250, False]
-          , 'VII': [WIDTH - 250, 350, False], 'VIII': [WIDTH - 150, 350, False], 'Beta': [WIDTH - 50, 350, False], 'Gamma': [WIDTH - 250, 450, False]}
+offset = -20
+rotors = {'I': [WIDTH - 250, 150 + offset, False], 'II': [WIDTH - 150, 150 + offset, False], 'III': [WIDTH - 50, 150 + offset, False], 'IV': [WIDTH - 250, 235 + offset, False], 'V': [WIDTH - 150, 235 + offset, False], 'VI': [WIDTH - 50, 235 + offset, False]
+          , 'VII': [WIDTH - 250, 320 + offset, False], 'VIII': [WIDTH - 150, 320 + offset, False], 'Beta': [WIDTH - 50, 320 + offset, False], 'Gamma': [WIDTH - 250, 405 + offset, False]}
 
 I      = ('E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J')
 II     = ('A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E')
@@ -30,14 +31,14 @@ Beta   = ('L', 'E', 'Y', 'J', 'V', 'C', 'N', 'I', 'X', 'W', 'P', 'B', 'Q', 'M', 
 Gamma  = ('F', 'S', 'O', 'K', 'A', 'N', 'U', 'E', 'R', 'H', 'M', 'B', 'T', 'I', 'Y', 'C', 'W', 'L', 'Q', 'P', 'Z', 'X', 'V', 'G', 'J', 'D')
 
 #Reflector
-reflectors = ('A', 'B', 'C', 'B_Thin', 'C_Thin')
+reflectors = {'A': [WIDTH - 250, 550 + offset, False], 'B': [WIDTH - 150, 550 + offset, False], 'C': [WIDTH - 50, 550 + offset, False], 'B_Thin': [WIDTH - 250, 635 + offset, False], 'C_Thin': [WIDTH - 150, 635 + offset, False]}
 A      = ('E', 'J', 'M', 'Z', 'A', 'L', 'Y', 'X', 'V', 'B', 'W', 'F', 'C', 'R', 'Q', 'U', 'O', 'N', 'T', 'S', 'P', 'I', 'K', 'H', 'G', 'D')
 B      = ('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', 'K', 'M', 'I', 'E', 'B', 'F', 'Z', 'C', 'W', 'V', 'J', 'A', 'T')
 C      = ('F', 'V', 'P', 'J', 'I', 'A', 'O', 'Y', 'E', 'D', 'R', 'Z', 'X', 'W', 'G', 'C', 'T', 'K', 'U', 'Q', 'S', 'B', 'N', 'M', 'H', 'L')
 B_Thin = ('E', 'N', 'K', 'Q', 'A', 'U', 'Y', 'W', 'J', 'I', 'C', 'O', 'P', 'B', 'L', 'M', 'D', 'X', 'Z', 'V', 'F', 'T', 'H', 'R', 'G', 'S')
 C_Thin = ('R', 'D', 'O', 'B', 'J', 'N', 'T', 'K', 'V', 'E', 'H', 'M', 'L', 'F', 'C', 'W', 'Z', 'A', 'X', 'G', 'Y', 'I', 'P', 'S', 'U', 'Q')
 
-setting = []
+setting = [None, None, None, None]
 
 # BG = pygame.image.load("/imgs/bg.jpeg")
 ## can scale with BG = pygame.transform.scale(image.load("/imgs/bg.jpeg"), (WIDTH, HEIGHT))
@@ -97,9 +98,14 @@ class cover():
         self.height = height
         self.colour = colour
         self.tick_count = 0
+        self.label = pygame.font.SysFont('Corbel',25)
 
     def draw(self, WIN):    
         pygame.draw.rect(WIN, self.colour, (self.x,self.y, self.width, self.height), border_radius=10)
+        self.text = self.label.render("Rotors", True, (0,0,0))
+        WIN.blit(self.text,(WIDTH-280,60))
+        self.text = self.label.render("Reflectors", True, (0,0,0))
+        WIN.blit(self.text,(WIDTH-280,450))
 
     def move(self, Horizontal, open):
         if open == True:
@@ -114,11 +120,15 @@ class cover():
 
 
 class button():
-    def __init__(self):
+    def __init__(self, location):
         self.colour = (100,100,100)
         self.white = (255,255,255)
         self.black = (0,0,0)
         self.label = pygame.font.SysFont('Corbel',35)
+        self.x = location[0]
+        self.y = location [1]
+        self.width = location[2]
+        self.height = location [3]
     
     def draw(self, WIN, dimension, buttonText, mouse):
         if dimension[0] <= mouse[0] <= dimension[0]+dimension[2] and dimension[1] <= mouse[1] <= dimension[1]+dimension[3]:
@@ -148,7 +158,7 @@ class rotor():
     def __init__(self, name, location, load):
         self.colour = (100,100,100)
         self.white = (255,255,255)
-        self.radius = 10
+        self.radius = 40
         self.name = name
         self.location = location
         self.load = load
@@ -157,42 +167,42 @@ class rotor():
         self.y = location[1]
 
 
+
     def drawHolder(self, WIN):
-        pygame.draw.circle(WIN, self.colour, self.location, 40)
+        pygame.draw.circle(WIN, self.colour, self.location, self.radius)
         
         self.text = self.label.render(self.name, True, (0,0,0))
         WIN.blit(self.text, self.text.get_rect(center = (self.location[0],self.location[1])) )
 
 
     def drawRotor(self, WIN):
-        self.rotorWhite = pygame.draw.circle(WIN, self.white, self.location, 40)
+        self.rotorWhite = pygame.draw.circle(WIN, self.white, (self.x, self.y), self.radius)
         self.rotorText = self.label.render(self.name, True, (0,0,0))
-        WIN.blit(self.rotorText, self.text.get_rect(center = (self.location[0],self.location[1])) )
+        WIN.blit(self.rotorText, self.text.get_rect(center = (self.x,self.y) ))
 
 
-    def drag(self, event, eventPos, rotorsList):
+    def drag(self, event, rotorsList):
         dragFlag = False
+        to_move = None
+
         for rotors in rotorsList:
             if rotors.rotorWhite.collidepoint(event.pos):
                 to_move = rotors
                 dragFlag = True
-                print("1")
-        return dragFlag, eventPos, to_move
+        return dragFlag, to_move
     
-    def move(self, eventPos,mouse, event, rotorsList):
+    def move(self, eventPos,mouse, event, rotorsList, to_move):
         offset_x = mouse[0] - eventPos[0]
         offset_y = mouse[1] - eventPos[1]
-        
-        for rotors in rotorsList:
-            if rotors.rotorWhite.collidepoint(event.pos):
-                print(offset_x, offset_y)
-                self.x = self.rotorWhite.x + offset_x
-                self.y = self.rotorWhite.y + offset_y
+
+        return offset_x, offset_y
+
+
 
 
     
 
-def draw(win, mouse, covers, open_covers, rotorButton, rotorExit, keyPressed, rotorsLoad, dragFlag):
+def draw(win, mouse, covers, open_covers, rotorButton, rotorExit, rotorClear, keyPressed, rotorsLoad, dragFlag, to_move, offset_x, offset_y, eventPos, rotorHolder):
     win.fill((0,0,0))
     
     # WIN.blit(BG, (0, 0))
@@ -226,12 +236,6 @@ def draw(win, mouse, covers, open_covers, rotorButton, rotorExit, keyPressed, ro
     topKey(keyLoc['m'][0], "M", keyPressed, keyLoc['m'][1])
     
     
-
-    #bg = pygame.draw.rect(WIN,"Brown", (100,50, 700, 250))
-    
-
-    
-
     for cover in covers:
         cover.draw(win)
     
@@ -239,17 +243,29 @@ def draw(win, mouse, covers, open_covers, rotorButton, rotorExit, keyPressed, ro
         rotorButton.draw(win, (WIDTH-215,96,125,40), "Rotors", mouse)
 
     else:
-        rotorExit.draw(win, (WIDTH-215, 676, 125, 40), "Close", mouse)
+        rotorExit.draw(win, (WIDTH-135, 676, 125, 40), "Close", mouse)
+        rotorClear.draw(win, (WIDTH-285, 676, 125, 40), "Clear", mouse)
 
-        
+        for holders in rotorHolder:
+            holders.drawHolder(win)
         
         for rotorsObj in rotorsLoad:
             rotorsObj.drawHolder(win)
-            if rotorsObj.load or dragFlag:
+            
+            if rotorsObj.load:
                 pass
             else:
-                
+                if rotorsObj == to_move:
+                    if dragFlag:
+                        rotorsObj.x = rotorsObj.x + offset_x
+                        rotorsObj.y = rotorsObj.y + offset_y
+                        
+                    rotorsObj.x = eventPos[0]
+                    rotorsObj.y = eventPos[1]
+
                 rotorsObj.drawRotor(win)
+        
+        
                 
                 
                 
@@ -275,25 +291,46 @@ def main():
     rotor_bg = cover("Brown", 100, 50, 600, 200)
     rotor_cover = cover("Black", 100, 50, 600, 200) 
 
-    rotorButton = button()
-    rotorExit = button()
+    rotorButton = button((WIDTH-215,96,125,40))
+    rotorExit = button((WIDTH-135, 676, 125, 40))
+    rotorClear = button((WIDTH-285, 676, 125, 40))
     
     rotorsLoad = []
     for rotorRef in rotors:
         rotorRef = rotor(rotorRef, [rotors[rotorRef][0], rotors[rotorRef][1]], rotors[rotorRef][2])
         rotorsLoad.append(rotorRef)
-
     
+    for reflectorRef in reflectors:
+        reflectorRef = rotor(reflectorRef, [reflectors[reflectorRef][0], reflectors[reflectorRef][1]], reflectors[reflectorRef][2])
+        rotorsLoad.append(reflectorRef)
+
+    rotorHolder = []
+    i = 0
+    for holderRef in range(4):
+        holderRef = rotor(holderRef, [170 + int(holderRef)*140,150], "")
+        if i == 0:
+            holderRef.name = "Reflect"
+        else:
+            holderRef.name = str(i)
+        
+        rotorHolder.append(holderRef)
+        i += 1
+
+
     
     keyName = ""
     keyPressed = False
     dragFlag = False
     eventPos = (0,0)
     to_move = None
+    offset_x = 0
+    offset_y = 0
+    holderSnap = 60
 
     while run:
         clock.tick(FPS)
         mouse = pygame.mouse.get_pos()
+        
         
         for event in pygame.event.get():
             keys = pygame.key.get_pressed()
@@ -310,30 +347,126 @@ def main():
                 keyName = ""
                 keyPressed = False
 
-            if event.type == pygame.MOUSEBUTTONDOWN and WIDTH-215 <= mouse[0] <= WIDTH-215+125 and 96 <= mouse[1] <= (96+40) and rotor_choice_open == False:
+            if event.type == pygame.MOUSEBUTTONDOWN and rotorButton.x <= mouse[0] <= rotorButton.x + rotorButton.width and rotorButton.y <= mouse[1] <= rotorButton.y + rotorButton.height and rotor_choice_open == False:
                 rotor_choice_open = True
                 cover_movement(rotor_choice_open, rotor_choice, rotor_cover)
 
-            elif event.type == pygame.MOUSEBUTTONDOWN and WIDTH-215 <= mouse[0] <= WIDTH-215+125 and 676 <= mouse[1] <= (676+40) and rotor_choice_open == True:
+            elif event.type == pygame.MOUSEBUTTONDOWN and rotorExit.x <= mouse[0] <= rotorExit.x + rotorExit.width and rotorExit.y <= mouse[1] <= rotorExit.y + rotorExit.height and rotor_choice_open == True:
                 rotor_choice_open = False
                 cover_movement(rotor_choice_open, rotor_choice, rotor_cover)
+            elif event.type == pygame.MOUSEBUTTONDOWN and rotorClear.x <= mouse[0] <= rotorClear.x + rotorClear.width and rotorClear.y <= mouse[1] <= rotorClear.y + rotorClear.height and rotor_choice_open == True:
+                
+                for rotorsClear in rotorsLoad:
+                    print(rotorsClear.name)
+                    if rotorsClear.name in rotors:
+                        rotorsClear.x = rotors[rotorsClear.name][0]
+                        rotorsClear.y = rotors[rotorsClear.name][1]
+
+                    else:
+                        rotorsClear.x = reflectors[rotorsClear.name][0]
+                        rotorsClear.y = reflectors[rotorsClear.name][1]
+                # print(rotorHolder)
+                # for holderRef in rotorHolder:
+                #     print(holderRef.load)
+                #     setting[setting.index(holderRef.load)] = None
+                #     holderRef.load = ""
+                
+                
+                
+
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                eventPos = mouse
-                dragFlag, eventPos, to_move = rotorRef.drag(event, eventPos, rotorsLoad)
+                if rotor_choice_open:
+                    eventPos = mouse
+                    dragFlag, to_move = rotorRef.drag(event, rotorsLoad)
                 
 
             elif event.type == pygame.MOUSEMOTION:
                 if dragFlag == True:
-                    rotorRef.move(eventPos, mouse, event, rotorsLoad, to_move)
-                    pass
+                    offset_x, offset_y = rotorRef.move(eventPos, mouse, event, rotorsLoad, to_move)
+                    eventPos = mouse
             
             elif event.type == pygame.MOUSEBUTTONUP:
-                dragFlag = False
+                if dragFlag == True:
+                    dragFlag = False
+                    eventPos = mouse
+                    if rotor_choice.x < eventPos[0] < rotor_choice.x + rotor_choice.width and rotor_choice.y < eventPos[1] < rotor_choice.y + rotor_choice.height:
+                        if to_move.name in rotors:
+                            eventPos = (rotors[to_move.name][0], rotors[to_move.name][1])
+                            
+                        else:
+                            eventPos = (reflectors[to_move.name][0], reflectors[to_move.name][1])
+                        
+                        if to_move.name in setting:
+                            setting[setting.index(to_move.name)] = None
+                        
+                        for holderRef in rotorHolder:
+                            if holderRef.load == to_move.name:
+                                holderRef.load = None
+
+                    for holderRef in rotorHolder:
+                        if holderRef.name == "Reflect":
+                            if holderRef.x - holderRef.radius/2 - holderSnap < eventPos[0] < holderRef.x + holderRef.radius/2 + holderSnap and holderRef.y - holderRef.radius/2 - holderSnap < eventPos[1] < holderRef.y + holderRef.radius/2 + holderSnap \
+                                and to_move.name in reflectors:
+
+                                if holderRef.load == "" or holderRef.load == None or holderRef.load == to_move.name:
+                                    holderRef.load = to_move.name
+                                    eventPos = (holderRef.x, holderRef.y)
+                                    setting[0] = to_move.name
+                                    print(setting)
+                                else:
+                                    eventPos = (reflectors[to_move.name][0], reflectors[to_move.name][1])
+                               
+
+                            elif holderRef.x - holderRef.radius/2 - holderSnap < eventPos[0] < holderRef.x + holderRef.radius/2 + holderSnap and holderRef.y - holderRef.radius/2 - holderSnap < eventPos[1] < holderRef.y + holderRef.radius/2 + holderSnap \
+                                and to_move.name in rotors:
+                                eventPos = (rotors[to_move.name][0], rotors[to_move.name][1])
+
+
+
+
+
+                        elif holderRef.name != "Reflect":
+                            if holderRef.x - holderRef.radius/2 - holderSnap < eventPos[0] < holderRef.x + holderRef.radius/2 + holderSnap and holderRef.y - holderRef.radius/2 - holderSnap < eventPos[1] < holderRef.y + holderRef.radius/2 + holderSnap \
+                                and to_move.name in rotors:
+                                
+                               
+                                if holderRef.load == "" or holderRef.load == None or holderRef.load == to_move.name:
+                                    for holderRefCheck in rotorHolder:
+                                        if holderRefCheck.load == to_move.name and holderRefCheck.load != holderRef.load:
+                                            holderRefCheck.load = None
+                                    
+                                    holderRef.load = to_move.name
+                                    if to_move.name in setting:
+                                        setting[setting.index(to_move.name)] = None
+                                    eventPos = (holderRef.x, holderRef.y)
+                                    setting[int(holderRef.name)] = to_move.name
+                                    print(setting)
+                                    print(holderRef.load)
+                                    
+                                else:
+                                    for holderRefCheck in rotorHolder:
+                                        if holderRefCheck.load == to_move.name and holderRefCheck.load != holderRef.load:
+                                            holderRefCheck.load = None
+                                    eventPos = (rotors[to_move.name][0], rotors[to_move.name][1])
+
+
+                            elif holderRef.x - holderRef.radius/2 - holderSnap < eventPos[0] < holderRef.x + holderRef.radius/2 + holderSnap and holderRef.y - holderRef.radius/2 - holderSnap < eventPos[1] < holderRef.y + holderRef.radius/2 + holderSnap \
+                                and to_move.name in reflectors:
+                                
+                                eventPos = (reflectors[to_move.name][0], reflectors[to_move.name][1])
+                            
+                                
+
 
         
-        draw(WIN, mouse, [rotor_bg, rotor_choice, rotor_cover], rotor_choice_open, rotorButton, rotorExit, keyName, rotorsLoad, dragFlag)  
-
+        draw(WIN, mouse, [rotor_bg, rotor_choice, rotor_cover], rotor_choice_open, rotorButton, rotorExit, rotorClear, keyName, rotorsLoad, dragFlag, to_move, offset_x, offset_y, eventPos, rotorHolder)  
+        offset_x = 0
+        offset_y = 0
+        
+        
+        
+        
         
 
             
